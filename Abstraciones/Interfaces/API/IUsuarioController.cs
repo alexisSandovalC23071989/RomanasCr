@@ -7,8 +7,8 @@ namespace Abstraciones.Interfaces.API
     {
         Task<IActionResult> Obtener();
         Task<IActionResult> Obtener(Guid id);
-        Task<IActionResult> Agregar(UsuarioResponse usuario);
-        Task<IActionResult>Editar(Guid id, UsuarioResponse usuario);
+        Task<IActionResult> Agregar(UsuarioBase usuario);
+        Task<IActionResult>Editar(Guid id, UsuarioBase usuario);
         Task<IActionResult>Eliminar(Guid id);
       
 

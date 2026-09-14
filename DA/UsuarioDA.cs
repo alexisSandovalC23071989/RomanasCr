@@ -4,13 +4,15 @@ using Abstraciones.Modelos.ModeloAutenticacion;
 namespace DA
 {
     public class UsuarioDA : IUsuarioDA
+
     {
-        public Task<Guid> Agregar(UsuarioResponse usuario)
+
+        public Task<Guid> Agregar(UsuarioBase usuario)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Guid> Editar(Guid Id, UsuarioResponse usuario)
+        public Task<Guid> Editar(Guid Id, UsuarioBase usuario)
         {
             throw new NotImplementedException();
         }
@@ -20,12 +22,12 @@ namespace DA
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<UsuarioResponse>> Obtener()
+        public Task<IEnumerable<UsuarioBase>> Obtener()
         {
             throw new NotImplementedException();
         }
 
-        public Task<UsuarioResponse?> Obtener(Guid id)
+        public Task<UsuarioBase?> Obtener(Guid id)
         {
             throw new NotImplementedException();
         }

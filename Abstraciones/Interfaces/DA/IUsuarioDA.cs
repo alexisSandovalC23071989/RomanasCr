@@ -9,10 +9,10 @@ namespace Abstraciones.Interfaces.DA
 {
     public interface  IUsuarioDA
     {
-        Task<IEnumerable<UsuarioResponse>> Obtener();
-        Task<UsuarioResponse?>Obtener(Guid id);
-        Task<Guid> Agregar(UsuarioResponse usuario);
-        Task<Guid> Editar(Guid Id ,UsuarioResponse usuario);
+        Task<IEnumerable<UsuarioBase>> Obtener();
+        Task<UsuarioBase?>Obtener(Guid id);
+        Task<Guid> Agregar(UsuarioBase usuario);
+        Task<Guid> Editar(Guid Id ,UsuarioBase usuario);
         Task<Guid> Eliminar(Guid Id);
     }
 }
