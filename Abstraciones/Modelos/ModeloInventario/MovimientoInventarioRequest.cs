@@ -1,11 +1,9 @@
-﻿namespace Abstraciones.Modelos.ModeloPedido
+﻿namespace Abstraciones.Modelos.ModeloInventario
 {
-    public  class DetallePedidoRequest
+    public class MovimientoInventarioRequest
     {
         public Guid IdProducto { get; set; }
 
         public int Cantidad { get; set; }
-
-       
     }
 }

@@ -12,9 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Servicios\" />
-    <Folder Include="Modelos\ModeloInventario\" />
-    <Folder Include="Modelos\ModeloPromociones\" />
-    <Folder Include="Modelos\ModeloProveedor\" />
   </ItemGroup>
 
 </Project>
