@@ -16,8 +16,6 @@ namespace Abstraciones.Modelos.ModeloCarrito
 
         public decimal Precio { get; set; }
 
-        public decimal Descuento { get; set; }
-
         public decimal Subtotal { get; set; }
     }
 }

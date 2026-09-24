@@ -2,8 +2,8 @@
 {
     public class InventarioBase
     {
-        public Guid IdProducto { get; set; }
 
+        public string CodigoBarraProducto { get; set; } = string.Empty;
         public int CantidadDisponible { get; set; }
     }
 }

@@ -2,7 +2,9 @@
 {
     public class MovimientoInventarioRequest
     {
-        public Guid IdProducto { get; set; }
+        public string CodigoBarraProducto { get; set; } = string.Empty;
+
+        public TipoMovimiento TipoMovimiento { get; set; }
 
         public int Cantidad { get; set; }
     }

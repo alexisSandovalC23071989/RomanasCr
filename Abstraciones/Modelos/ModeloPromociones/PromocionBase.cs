@@ -2,7 +2,7 @@
 {
     public class PromocionBase
     {
-        public Guid IdProducto { get; set; }
+        public string CodigoBarraProducto { get; set; } = string.Empty;
 
         public decimal PorcentajeDescuento { get; set; }
 
