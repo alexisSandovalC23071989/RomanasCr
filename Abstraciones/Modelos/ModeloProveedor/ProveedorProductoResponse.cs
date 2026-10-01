@@ -7,7 +7,7 @@
         public Guid IdProveedor { get; set; }
         public string? NombreProveedor { get; set; }
 
-        public Guid IdProducto { get; set; }
+        public string CodigoBarraProducto { get; set; } = string.Empty;
         public string? DescripcionProducto { get; set; }
     }
 }

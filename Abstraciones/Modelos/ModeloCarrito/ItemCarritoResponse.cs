@@ -8,7 +8,7 @@ namespace Abstraciones.Modelos.ModeloCarrito
 {
     public class ItemCarritoResponse
     {
-        public Guid IdProducto { get; set; }
+        public string CodigoBarraProducto { get; set; } = string.Empty;
 
         public string? DescripcionProducto { get; set; }
 

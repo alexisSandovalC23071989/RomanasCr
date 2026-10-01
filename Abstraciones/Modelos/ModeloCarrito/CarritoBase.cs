@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Abstraciones.Modelos.ModeloCarrito
 {
-    public class ItemCarritoRequest
+    public class CarritoBase
     {
-        public string CodigoBarraProducto { get; set; } = string.Empty;
-
-        public int Cantidad { get; set; }
+        public Guid IdUsuario { get; set; }
     }
 }

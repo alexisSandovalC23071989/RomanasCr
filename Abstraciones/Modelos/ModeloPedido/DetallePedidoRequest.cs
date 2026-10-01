@@ -2,7 +2,7 @@
 {
     public  class DetallePedidoRequest
     {
-        public Guid IdProducto { get; set; }
+        public string CodigoBarraProducto { get; set; } = string.Empty;
 
         public int Cantidad { get; set; }
 
