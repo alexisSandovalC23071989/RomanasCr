@@ -58,6 +58,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Usuarios.sql" />
@@ -71,5 +72,23 @@
     <Build Include="dbo\Tables\DetallePedido.sql" />
     <Build Include="dbo\Tables\DetalleCarrito.sql" />
     <Build Include="dbo\Tables\Carritos.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerUsuarios.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\EditarUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProductos.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProducto.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarProducto.sql" />
+    <Build Include="dbo\Stored Procedures\EditarProducto.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarProducto.sql" />
+    <Build Include="dbo\Stored Procedures\RegistrarMovimientoInventario.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerMovimientosPorProducto.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerMovimientosInventario.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPromociones.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\EditarPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarPromocion.sql" />
   </ItemGroup>
 </Project>
