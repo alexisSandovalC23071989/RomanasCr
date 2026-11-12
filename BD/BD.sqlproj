@@ -90,5 +90,11 @@
     <Build Include="dbo\Stored Procedures\EliminarPromocion.sql" />
     <Build Include="dbo\Stored Procedures\EditarPromocion.sql" />
     <Build Include="dbo\Stored Procedures\AgregarPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProveedores.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\EditarProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProveedoresProductos.sql" />
   </ItemGroup>
 </Project>

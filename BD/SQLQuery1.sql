@@ -1228,3 +1228,257 @@ BEGIN
 
 END;
 GO
+
+------------------------Obtener proveedores--------------------
+
+USE RomanasCr;
+GO
+
+CREATE OR ALTER PROCEDURE ObtenerProveedores
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    SELECT
+        Id,
+        Nombre,
+        Telefono,
+        Correo,
+        Direccion
+    FROM Proveedores;
+
+END;
+GO
+
+
+-----------------Obtener proveedor------------------
+
+CREATE OR ALTER PROCEDURE ObtenerProveedor
+    @Id UNIQUEIDENTIFIER
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    SELECT
+        Id,
+        Nombre,
+        Telefono,
+        Correo,
+        Direccion
+    FROM Proveedores
+    WHERE Id = @Id;
+
+END;
+GO
+
+-------------------Agregar Proveedor------------------------------
+
+CREATE OR ALTER PROCEDURE AgregarProveedor
+    @Nombre VARCHAR(150),
+    @Telefono VARCHAR(20),
+    @Correo VARCHAR(150),
+    @Direccion VARCHAR(250)
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    -- 1. Validar el nombre
+    IF @Nombre IS NULL OR LTRIM(RTRIM(@Nombre)) = ''
+    BEGIN
+        THROW 50022, 'El nombre del proveedor es obligatorio.', 1;
+    END;
+
+    -- 2. Validar el telefono
+    IF @Telefono IS NULL OR LTRIM(RTRIM(@Telefono)) = ''
+    BEGIN
+        THROW 50023, 'El telefono del proveedor es obligatorio.', 1;
+    END;
+
+    -- 3. Validar el correo
+    IF @Correo IS NULL OR LTRIM(RTRIM(@Correo)) = ''
+    BEGIN
+        THROW 50024, 'El correo del proveedor es obligatorio.', 1;
+    END;
+
+    -- 4. Validar la direccion
+    IF @Direccion IS NULL OR LTRIM(RTRIM(@Direccion)) = ''
+    BEGIN
+        THROW 50025, 'La direccion del proveedor es obligatoria.', 1;
+    END;
+
+    -- 5. Validar correo duplicado
+    IF EXISTS
+    (
+        SELECT 1
+        FROM Proveedores
+        WHERE Correo = @Correo
+    )
+    BEGIN
+        THROW 50026, 'Ya existe un proveedor con ese correo.', 1;
+    END;
+
+    -- 6. Generar identificador
+    DECLARE @Id UNIQUEIDENTIFIER = NEWID();
+
+    -- 7. Registrar proveedor
+    INSERT INTO Proveedores
+    (
+        Id,
+        Nombre,
+        Telefono,
+        Correo,
+        Direccion
+    )
+    VALUES
+    (
+        @Id,
+        @Nombre,
+        @Telefono,
+        @Correo,
+        @Direccion
+    );
+
+    -- 8. Devolver identificador
+    SELECT @Id AS Id;
+
+END;
+GO
+
+---------------------------- Editar Proveedor-------------------
+
+CREATE OR ALTER PROCEDURE EditarProveedor
+    @Id UNIQUEIDENTIFIER,
+    @Nombre VARCHAR(150),
+    @Telefono VARCHAR(20),
+    @Correo VARCHAR(150),
+    @Direccion VARCHAR(250)
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    -- 1. Validar que el proveedor exista
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM Proveedores
+        WHERE Id = @Id
+    )
+    BEGIN
+        THROW 50027, 'El proveedor no existe.', 1;
+    END;
+
+    -- 2. Validar el nombre
+    IF @Nombre IS NULL OR LTRIM(RTRIM(@Nombre)) = ''
+    BEGIN
+        THROW 50028, 'El nombre del proveedor es obligatorio.', 1;
+    END;
+
+    -- 3. Validar el telefono
+    IF @Telefono IS NULL OR LTRIM(RTRIM(@Telefono)) = ''
+    BEGIN
+        THROW 50029, 'El telefono del proveedor es obligatorio.', 1;
+    END;
+
+    -- 4. Validar el correo
+    IF @Correo IS NULL OR LTRIM(RTRIM(@Correo)) = ''
+    BEGIN
+        THROW 50030, 'El correo del proveedor es obligatorio.', 1;
+    END;
+
+    -- 5. Validar la direccion
+    IF @Direccion IS NULL OR LTRIM(RTRIM(@Direccion)) = ''
+    BEGIN
+        THROW 50031, 'La direccion del proveedor es obligatoria.', 1;
+    END;
+
+    -- 6. Validar que otro proveedor no tenga el mismo correo
+    IF EXISTS
+    (
+        SELECT 1
+        FROM Proveedores
+        WHERE Correo = @Correo
+          AND Id <> @Id
+    )
+    BEGIN
+        THROW 50032, 'Ya existe otro proveedor con ese correo.', 1;
+    END;
+
+    -- 7. Actualizar los datos
+    UPDATE Proveedores
+    SET
+        Nombre = @Nombre,
+        Telefono = @Telefono,
+        Correo = @Correo,
+        Direccion = @Direccion
+    WHERE Id = @Id;
+
+END;
+GO
+-------------------------------- EliminarProveedor --------------------------
+
+CREATE OR ALTER PROCEDURE EliminarProveedor
+    @Id UNIQUEIDENTIFIER
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    -- 1. Validar que el proveedor exista
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM Proveedores
+        WHERE Id = @Id
+    )
+    BEGIN
+        THROW 50033, 'El proveedor no existe.', 1;
+    END;
+
+    -- 2. Validar que no tenga productos asociados
+    IF EXISTS
+    (
+        SELECT 1
+        FROM ProveedorProducto
+        WHERE IdProveedor = @Id
+    )
+    BEGIN
+        THROW 50034,
+              'No se puede eliminar el proveedor porque tiene productos asociados.',
+              1;
+    END;
+
+    -- 3. Eliminar el proveedor
+    DELETE FROM Proveedores
+    WHERE Id = @Id;
+
+END;
+GO
+------------------------ObtenerProveedoresProductos------------------------
+
+CREATE OR ALTER PROCEDURE ObtenerProveedoresProductos
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    SELECT
+        PP.Id,
+        PP.IdProveedor,
+        PR.Nombre AS NombreProveedor,
+        PP.CodigoBarraProducto,
+        P.Descripcion AS DescripcionProducto
+
+    FROM ProveedorProducto PP
+
+    INNER JOIN Proveedores PR
+        ON PP.IdProveedor = PR.Id
+
+    INNER JOIN Productos P
+        ON PP.CodigoBarraProducto = P.CodigoBarra;
+
+END;
+GO
